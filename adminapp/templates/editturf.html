@@ -1,0 +1,48 @@
+{% extends 'adminpage.html' %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <div class="card">
+               <div class="card-body">
+                    <div class="card-title">Add Turf</div>
+                    <hr>
+                    {% for i in data %}
+                    <form action="{% url 'updateturf' id=i.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="input-6">Turf Name</label>
+                            <input type="text" class="form-control form-control-rounded" id="input-6" placeholder="Enter Turf Name" name="turf_name" value="{{i.t_name}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-7">Location</label>
+                            <input type="text" class="form-control form-control-rounded" id="input-7" placeholder="Enter Turf Location" name="location" value="{{i.t_location}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-8">Category</label>
+                            <select class="form-control form-control-rounded" name="turf_category" value="{{i.t_cat}}">
+                                <option selected>Select a game Category</option>
+                                {% for i in dataC %}
+                                <option value="{{i.cat_name}}">{{i.cat_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-9">Price</label>
+                            <input type="text" class="form-control form-control-rounded" id="input-9" placeholder="Enter Price" name="price" value="{{i.t_price}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-10">Upload Image</label>
+                            <input type="file" class="form-control form-control-rounded" id="input-10" placeholder="Browse Image" name="image">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-light btn-round px-5"> Submit</button>
+                        </div>
+                    </form>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

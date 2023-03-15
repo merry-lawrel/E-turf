@@ -1,0 +1,49 @@
+{% extends 'mgrpage.html' %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <h3 class="card-title">Turf Booking List :</h3>
+            <div class="table-responsive">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Turf Name : </th>
+                                <th>{{data.m_turf}}</th>
+                            </tr>
+                        </table>
+                        <table class="table table-hover">
+                            <tr>
+                            <th>Serial No.</th>
+                            <th>User Name</th>
+                            <th>Contact</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th colspan="2"></th>
+                            </tr>
+                            {% for j in datab %}
+                            <tr>
+                            <td scope="row">{{ forloop.counter }}</td>
+                            <td>{{j.b_name}}</td>
+                            <td>{{j.b_umob}}</td>
+                            <td>{{j.b_date}}</td>
+                            <td>{{j.b_time}}</td>
+                            {% if '0' in j.status %}
+                            <td><a href="{% url 'accept' id=j.id %}"><button>Accept</button></a></td>
+                            <td><a href="{% url 'decline' id=j.id %}"><button>Decline</button></a></td>
+                            {% elif '1' in j.status %}
+                            <td><a href="#"><button>Accepted</button></a></td>
+                            <td><a href="{% url 'decline' id=j.id %}"><button disabled>Sent Bill</button></a></td>
+                            {% else %}
+                            <td><a href="{% url 'accept' id=j.id %}"><button disbaled>Accept</button></a></td>
+                            <td><a href="#"><button>Declined</button></a></td>
+                            {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

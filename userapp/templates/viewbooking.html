@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+{% block content %}
+{% load static %}
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <br><br>
+            <h5 class="card-title">Bookings</h5>
+            {% if '0' in data %}
+            <p><b>No Bookings made yet. To book your turf, <a href="{% url 'index' %}">click here</a>.</b></p>
+            {% else %}
+            <div class="table-responsive">
+                        <table class="table table-hover">
+                            <tr>
+                            <th>Serial No.</th>
+                            <th>User Name</th>
+                            <th>Turf</th>
+                            <th>Price</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <!-- <th>Delete</th> -->
+                            </tr>
+                            {% for i in data %}
+                            <tr>
+                            <td scope="row">{{ forloop.counter }}</td>
+                            <td>{{i.b_name}}</td>
+                            <td>{{i.b_turf}}</td>
+                            <td>{{i.b_price}}</td>
+                            <td>{{i.b_date}}</td>
+                            <td>{{i.b_time}}</td>
+                            {% if '0' in i.status %}
+                            <td>Pending</td>
+                            {% elif '1' in i.status %}
+                            <td style="color: green;">Accepted</td>
+                            <td><a href="{% url 'getbill' %}"><button>Get Bill</button></a></td>
+                            {% else %}
+                            <td style="color: red;">Declined</td>
+                            {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </table>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block this %}
+<li><a href="{% url 'index' %}">Turfs</a></li>
+<li><a href="{% url 'index' %}s">Tournaments</a></li>
+{% endblock %}
