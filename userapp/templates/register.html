@@ -8,7 +8,7 @@
           {% if 'uid' in request.session %}
           <p>Already logged in!</p>
           {% else %}
-          <form action="{% url 'getreg' %}" method="post" class="bg-white">
+          <form action="{% url 'getreg' %}" method="post" class="bg-white" id="frm">
             {% csrf_token %}
             <div class="p-3 p-lg-5 border">
               <div class="form-group row">
@@ -60,7 +60,31 @@
       </div>
     </div>
 </div>
-{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
+   <script type="text/javascript">
+    $('#frm').validate({
+    rules: {
+      username: {
+        required: true,
+        minlength: 3
+        },
+      password:{
+        required:true,
+        minlength: 3
+        },
+      email:{
+        required:true,
+        email:true
+        },
+      mobile:{
+        required:true,
+        minlength: 10
+        } 
+
+         }
+           })
+   </script>
 {% endblock %}
 {% block this %}
 <li><a href="{% url 'index' %}">Turfs</a></li>
